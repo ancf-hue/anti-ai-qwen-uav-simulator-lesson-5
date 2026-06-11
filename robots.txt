@@ -1,0 +1,28 @@
+# robots.txt для тренажёра "Оператор МЕДВЕДЬ"
+User-agent: *
+Allow: /
+
+# Запрещаем технические страницы
+Disallow: /admin/
+Disallow: /private/
+Disallow: /temp/
+Disallow: /*?*
+
+# Основная карта сайта
+Sitemap: https://anti-ai-qwen-uav-simulator-lesson-5.vercel.app/sitemap.xml
+
+# Задержка для снижения нагрузки
+Crawl-delay: 5
+
+# Настройки для разных поисковиков
+User-agent: Googlebot
+Crawl-delay: 2
+
+User-agent: Yandex
+Crawl-delay: 3
+
+User-agent: Bingbot
+Crawl-delay: 2
+
+# Хост
+Host: https://anti-ai-qwen-uav-simulator-lesson-5.vercel.app
