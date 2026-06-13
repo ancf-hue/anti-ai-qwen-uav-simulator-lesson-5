@@ -6,62 +6,280 @@
 <link rel="icon" href="favicon.ico" type="image/x-icon">
 <title>Урок 5: Грузовая доставка | Оператор МЕДВЕДЬ — Qwen</title>
 <style>
+:root{
+  --theme-color:#48bb78;
+  --theme-color-rgb:72,187,120;
+  --theme-glow:rgba(72,187,120,0.6);
+  --theme-dark:#2f855a;
+  --theme-gradient:linear-gradient(135deg,#48bb78,#2f855a);
+}
 *{ box-sizing: border-box; margin: 0; padding: 0;}
 body{ overflow: hidden; font-family:'Segoe UI','Orbitron', monospace; background:#1a2f1a; color:#ccffcc;}
 
-.logo-header{ position: fixed; top: 20px; left: 20px; z-index: 1000; display: flex; align-items: center; gap: 10px; padding: 10px 16px; background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(12px); border-radius: 50px; border: 2px solid transparent; background-clip: padding-box; box-shadow: 0 8px 32px rgba(139, 90, 43, 0.4), 0 0 40px rgba(101, 67, 33, 0.3);}
-.logo-header::before{ content:''; position: absolute; inset:-2px; background: linear-gradient(135deg,#8b5a2b,#654321,#ffd700, #8b5a2b); border-radius: 50px; z-index:-1; animation: gradientShift 5s ease infinite; background-size: 300% 300%;}
+.logo-header{ position: fixed; top: 20px; left: 20px; z-index: 1000; display: flex; align-items: center; gap: 10px; padding: 10px 16px; background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(12px); border-radius: 50px; border: 2px solid transparent; background-clip: padding-box; box-shadow: 0 8px 32px var(--theme-glow), 0 0 40px rgba(101, 67, 33, 0.3);}
+.logo-header::before{ content:''; position: absolute; inset:-2px; background: linear-gradient(135deg,#8b5a2b,#654321,var(--theme-color), #8b5a2b); border-radius: 50px; z-index:-1; animation: gradientShift 5s ease infinite; background-size: 300% 300%;}
 @keyframes gradientShift{ 0%, 100%{ background-position: 0% 50%;} 50%{ background-position: 100% 50%;}}
 .logo-header img{ width: 40px; height: 40px; border-radius: 10px; animation: logoPulse 2s ease-in-out infinite;}
-@keyframes logoPulse{ 0%, 100%{ transform: scale(1); filter: drop-shadow(0 0 8px #8b5a2b);} 50%{ transform: scale(1.05); filter: drop-shadow(0 0 15px #ffd700) drop-shadow(0 0 25px #8b5a2b);}}
+@keyframes logoPulse{ 0%, 100%{ transform: scale(1); filter: drop-shadow(0 0 8px #8b5a2b);} 50%{ transform: scale(1.05); filter: drop-shadow(0 0 15px var(--theme-color)) drop-shadow(0 0 25px #8b5a2b);}}
 .logo-text{ display: flex; flex-direction: column; gap: 2px;}
-.logo-main{ font-size: 13px; font-weight: 900; background: linear-gradient(135deg,#ffffff,#8b5a2b,#ffd700); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: 1px; white-space: nowrap;}
-.logo-sub{ font-size: 11px; color:#ffd700; font-weight: bold; letter-spacing: 2px; text-shadow: 0 0 10px rgba(255, 215, 0, 0.8);}
+.logo-main{ font-size: 13px; font-weight: 900; background: linear-gradient(135deg,#ffffff,#8b5a2b,var(--theme-color)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: 1px; white-space: nowrap;}
+.logo-sub{ font-size: 11px; color:var(--theme-color); font-weight: bold; letter-spacing: 2px; text-shadow: 0 0 10px var(--theme-glow);}
 
 #intro-page{ position: fixed; inset: 0; background: radial-gradient(ellipse at center,#2d4a2d 0%,#1a2f1a 50%,#0a1a0a 100%); display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 500; transition: opacity 0.8s ease, transform 0.8s ease; overflow-y: auto; padding: 80px 20px 20px;}
 #intro-page.hidden{ opacity: 0; pointer-events: none; transform: scale(1.1);}
 .intro-image{ width: 90%; max-width: 900px; border-radius: 20px; box-shadow: 0 0 60px rgba(139, 90, 43, 0.5), 0 0 100px rgba(101, 67, 33, 0.3); border: 3px solid rgba(139, 90, 43, 0.6); animation: imageGlow 3s ease-in-out infinite;}
 @keyframes imageGlow{ 0%, 100%{ box-shadow: 0 0 40px rgba(139, 90, 43, 0.4), 0 0 80px rgba(101, 67, 33, 0.2);} 50%{ box-shadow: 0 0 60px rgba(139, 90, 43, 0.6), 0 0 120px rgba(101, 67, 33, 0.4);}}
-.intro-title{ margin-top: 30px; font-size: 42px; font-weight: 900; background: linear-gradient(135deg,#ffffff,#8b5a2b,#ffd700); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; text-align: center; letter-spacing: 3px; animation: titlePulse 2s ease-in-out infinite;}
+.intro-title{ margin-top: 30px; font-size: 42px; font-weight: 900; background: linear-gradient(135deg,#ffffff,#8b5a2b,var(--theme-color)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; text-align: center; letter-spacing: 3px; animation: titlePulse 2s ease-in-out infinite;}
 @keyframes titlePulse{ 0%, 100%{ opacity: 1; transform: scale(1);} 50%{ opacity: 0.9; transform: scale(1.02);}}
-.intro-subtitle{ margin-top: 10px; font-size: 20px; color:#ffd700; text-align: center; letter-spacing: 5px; text-shadow: 0 0 20px rgba(255, 215, 0, 0.8);}
+.intro-subtitle{ margin-top: 10px; font-size: 20px; color:var(--theme-color); text-align: center; letter-spacing: 5px; text-shadow: 0 0 20px var(--theme-glow);}
 .intro-desc{ margin-top: 20px; max-width: 600px; text-align: center; color:#b0d4b0; font-size: 14px; line-height: 1.6; padding: 0 20px;}
-.start-btn{ margin-top: 30px; padding: 18px 60px; font-size: 20px; font-weight: bold; background: linear-gradient(145deg,#8b5a2b,#654321); border: none; border-radius: 50px; color: white; cursor: pointer; box-shadow: 0 8px 0 #3d2817, 0 15px 30px rgba(139, 90, 43, 0.6); transition: all 0.2s; text-transform: uppercase; letter-spacing: 2px;}
-.start-btn:hover{ transform: translateY(-3px); box-shadow: 0 11px 0 #3d2817, 0 20px 40px rgba(139, 90, 43, 0.8);}
-.start-btn:active{ transform: translateY(5px); box-shadow: 0 3px 0 #3d2817, 0 8px 15px rgba(139, 90, 43, 0.6);}
+
+.difficulty-section{ margin-top: 30px; width: 100%; max-width: 800px;}
+.difficulty-title{ text-align: center; font-size: 18px; color:#ffd700; letter-spacing: 3px; margin-bottom: 25px; text-transform: uppercase; text-shadow: 0 0 15px rgba(255, 215, 0, 0.6);}
+.difficulty-grid{ display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; perspective: 1200px;}
+
+.difficulty-btn{
+  position: relative;
+  padding: 0;
+  border: none;
+  border-radius: 24px;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  overflow: visible;
+  transform-style: preserve-3d;
+  transform: translateY(0) rotateX(0);
+  aspect-ratio: 1 / 1.1;
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  background: var(--btn-face);
+  box-shadow:
+    inset 0 2px 0 rgba(255,255,255,0.35),
+    inset 0 -4px 12px rgba(0,0,0,0.25),
+    0 2px 0 var(--btn-edge-1),
+    0 4px 0 var(--btn-edge-2),
+    0 6px 0 var(--btn-edge-3),
+    0 8px 0 var(--btn-edge-4),
+    0 10px 0 var(--btn-edge-5),
+    0 14px 20px rgba(0,0,0,0.5),
+    0 20px 40px var(--btn-glow);
+}
+
+.difficulty-btn::before{
+  content:'';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 50%;
+  background: linear-gradient(180deg, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0.08) 50%, transparent 100%);
+  border-radius: 24px 24px 50% 50% / 24px 24px 100% 100%;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.difficulty-btn::after{
+  content:'';
+  position: absolute;
+  bottom: -15px; left: 10%; right: 10%;
+  height: 20px;
+  background: radial-gradient(ellipse at center, var(--btn-glow) 0%, transparent 70%);
+  filter: blur(8px);
+  opacity: 0.6;
+  z-index: -1;
+  transition: opacity 0.3s;
+}
+
+.difficulty-btn:hover{
+  transform: translateY(-6px);
+  box-shadow:
+    inset 0 2px 0 rgba(255,255,255,0.45),
+    inset 0 -4px 12px rgba(0,0,0,0.25),
+    0 2px 0 var(--btn-edge-1),
+    0 4px 0 var(--btn-edge-2),
+    0 6px 0 var(--btn-edge-3),
+    0 8px 0 var(--btn-edge-4),
+    0 10px 0 var(--btn-edge-5),
+    0 12px 0 var(--btn-edge-6),
+    0 20px 30px rgba(0,0,0,0.5),
+    0 28px 50px var(--btn-glow);
+}
+.difficulty-btn:hover::after{ opacity: 1; }
+
+.difficulty-btn:active{
+  transform: translateY(6px);
+  transition-duration: 0.08s;
+  box-shadow:
+    inset 0 2px 0 rgba(255,255,255,0.25),
+    inset 0 -2px 8px rgba(0,0,0,0.35),
+    0 1px 0 var(--btn-edge-1),
+    0 2px 0 var(--btn-edge-2),
+    0 4px 10px rgba(0,0,0,0.4),
+    0 6px 20px var(--btn-glow);
+}
+
+.difficulty-btn.selected{
+  transform: translateY(-3px);
+  animation: selectedPulse 2s ease-in-out infinite;
+}
+.difficulty-btn.selected::before{
+  background: linear-gradient(180deg, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0.15) 50%, transparent 100%);
+}
+@keyframes selectedPulse{
+  0%, 100%{
+    box-shadow:
+      inset 0 2px 0 rgba(255,255,255,0.4),
+      inset 0 -4px 12px rgba(0,0,0,0.25),
+      0 2px 0 var(--btn-edge-1),
+      0 4px 0 var(--btn-edge-2),
+      0 6px 0 var(--btn-edge-3),
+      0 8px 0 var(--btn-edge-4),
+      0 10px 0 var(--btn-edge-5),
+      0 14px 20px rgba(0,0,0,0.5),
+      0 20px 45px var(--btn-glow),
+      0 0 60px var(--btn-glow);
+  }
+  50%{
+    box-shadow:
+      inset 0 2px 0 rgba(255,255,255,0.5),
+      inset 0 -4px 12px rgba(0,0,0,0.25),
+      0 2px 0 var(--btn-edge-1),
+      0 4px 0 var(--btn-edge-2),
+      0 6px 0 var(--btn-edge-3),
+      0 8px 0 var(--btn-edge-4),
+      0 10px 0 var(--btn-edge-5),
+      0 14px 25px rgba(0,0,0,0.5),
+      0 25px 60px var(--btn-glow),
+      0 0 90px var(--btn-glow);
+  }
+}
+
+.difficulty-btn .check-mark{
+  position: absolute;
+  top: -12px; right: -12px;
+  width: 36px; height: 36px;
+  background: #fff;
+  border-radius: 50%;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  color: var(--btn-color);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.4), 0 0 20px var(--btn-glow);
+  z-index: 5;
+  border: 3px solid var(--btn-color);
+  animation: checkBounce 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.difficulty-btn.selected .check-mark{ display: flex; }
+@keyframes checkBounce{
+  0%{ transform: scale(0) rotate(-180deg); }
+  60%{ transform: scale(1.2) rotate(15deg); }
+  100%{ transform: scale(1) rotate(0); }
+}
+
+.difficulty-btn .icon{
+  font-size: 64px;
+  display: block;
+  filter: drop-shadow(0 4px 6px rgba(0,0,0,0.4)) drop-shadow(0 0 20px var(--btn-glow));
+  transform: translateZ(30px);
+  animation: iconFloat 3s ease-in-out infinite;
+  line-height: 1;
+}
+@keyframes iconFloat{
+  0%, 100%{ transform: translateZ(30px) translateY(0); }
+  50%{ transform: translateZ(30px) translateY(-4px); }
+}
+
+.difficulty-btn .name{
+  font-size: 18px;
+  font-weight: 900;
+  color: #fff;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  text-shadow:
+    0 1px 0 rgba(0,0,0,0.3),
+    0 2px 4px rgba(0,0,0,0.5),
+    0 0 15px var(--btn-glow);
+  transform: translateZ(20px);
+  position: relative;
+  padding: 6px 14px;
+  background: rgba(0,0,0,0.2);
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.15);
+}
+
+.difficulty-btn.easy{
+  --btn-color:#48bb78;
+  --btn-glow:rgba(72,187,120,0.6);
+  --btn-face: linear-gradient(180deg, #68d391 0%, #48bb78 40%, #38a169 100%);
+  --btn-edge-1:#38a169;
+  --btn-edge-2:#2f855a;
+  --btn-edge-3:#276749;
+  --btn-edge-4:#22543d;
+  --btn-edge-5:#1c4532;
+  --btn-edge-6:#1a3a2a;
+}
+.difficulty-btn.medium{
+  --btn-color:#ecc94b;
+  --btn-glow:rgba(236,201,75,0.6);
+  --btn-face: linear-gradient(180deg, #f6e05e 0%, #ecc94b 40%, #d69e2e 100%);
+  --btn-edge-1:#d69e2e;
+  --btn-edge-2:#b7791f;
+  --btn-edge-3:#975a16;
+  --btn-edge-4:#744210;
+  --btn-edge-5:#5f370e;
+  --btn-edge-6:#4a2d0a;
+}
+.difficulty-btn.hard{
+  --btn-color:#e53e3e;
+  --btn-glow:rgba(229,62,62,0.6);
+  --btn-face: linear-gradient(180deg, #fc8181 0%, #e53e3e 40%, #c53030 100%);
+  --btn-edge-1:#c53030;
+  --btn-edge-2:#9b2c2c;
+  --btn-edge-3:#822727;
+  --btn-edge-4:#63171b;
+  --btn-edge-5:#4a1416;
+  --btn-edge-6:#3a0f11;
+}
+
+.start-btn{ margin-top: 40px; padding: 18px 60px; font-size: 20px; font-weight: bold; background: var(--theme-gradient); border: none; border-radius: 50px; color: white; cursor: pointer; box-shadow: 0 8px 0 var(--theme-dark), 0 15px 30px var(--theme-glow); transition: all 0.2s; text-transform: uppercase; letter-spacing: 2px;}
+.start-btn:hover{ transform: translateY(-3px); box-shadow: 0 11px 0 var(--theme-dark), 0 20px 40px var(--theme-glow);}
+.start-btn:active{ transform: translateY(5px); box-shadow: 0 3px 0 var(--theme-dark), 0 8px 15px var(--theme-glow);}
+.start-btn:disabled{ opacity: 0.4; cursor: not-allowed; transform: none !important;}
 
 #simulator-page{ position: fixed; inset: 0; opacity: 0; pointer-events: none; transition: opacity 1s ease; background: radial-gradient(ellipse at top,#2d4a2d 0%,#1a2f1a 50%, #0a1a0a 100%);}
 #simulator-page.active{ opacity: 1; pointer-events: all;}
 #simulator-page::before{ content:''; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background-image: radial-gradient(2px 2px at 20% 30%, white, transparent), radial-gradient(1px 1px at 60% 70%, white, transparent), radial-gradient(1px 1px at 50% 50%,#b0d4b0, transparent), radial-gradient(2px 2px at 80% 10%, white, transparent); background-size: 200% 200%; opacity: 0.3; pointer-events: none; z-index: 2; animation: twinkle 8s linear infinite;}
 @keyframes twinkle{ 0%, 100%{ opacity: 0.2;} 50%{ opacity: 0.5;}}
 
-#stats-panel{ position: fixed; top: 90px; left: 20px; z-index: 100; background: rgba(0, 0, 0, 0.7); backdrop-filter: blur(8px); border-radius: 20px; padding: 8px 15px; border-left: 4px solid #8b5a2b; pointer-events: none; font-family: monospace;}
+#stats-panel{ position: fixed; top: 90px; left: 20px; z-index: 100; background: rgba(0, 0, 0, 0.7); backdrop-filter: blur(8px); border-radius: 20px; padding: 8px 15px; border-left: 4px solid var(--theme-color); pointer-events: none; font-family: monospace;}
 .stats{ font-size: 12px; display: flex; gap: 10px; flex-wrap: wrap;}
-.stat{ background:#1a2a1a; padding: 3px 10px; border-radius: 20px; border: 1px solid #8b5a2b;}
+.stat{ background:#1a2a1a; padding: 3px 10px; border-radius: 20px; border: 1px solid var(--theme-color);}
 
 #crosshair{ position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 100px; height: 100px; pointer-events: none; z-index: 120;}
-#crosshair-circle{ position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 80px; height: 80px; border: 2px solid #8b5a2b; border-radius: 50%; box-shadow: 0 0 10px #8b5a2b;}
+#crosshair-circle{ position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 80px; height: 80px; border: 2px solid var(--theme-color); border-radius: 50%; box-shadow: 0 0 10px var(--theme-color);}
 #crosshair-progress{ position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 80px; height: 80px; border: 3px solid transparent; border-top-color: #ffd700; border-radius: 50%; opacity: 0; transition: opacity 0.2s;}
 #crosshair-progress.active{ opacity: 1; animation: progressSpin 1.5s linear infinite;}
 @keyframes progressSpin{ 0%{ transform: translate(-50%, -50%) rotate(0deg);} 100%{ transform: translate(-50%, -50%) rotate(360deg);}}
 #crosshair-dot{ position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 4px; height: 4px; background: #ff3333; border-radius: 50%; box-shadow: 0 0 8px #ff3333;}
 #crosshair.locked #crosshair-circle{ border-color: #ffd700; box-shadow: 0 0 20px #ffd700;}
 
-#stability-indicator{ position: fixed; bottom: 180px; left: 50%; transform: translateX(-50%); z-index: 100; background: rgba(0,0,0,0.7); backdrop-filter: blur(8px); padding: 8px 20px; border-radius: 20px; border: 1px solid #8b5a2b; font-family: monospace; font-size: 12px; color:#b0d4b0; pointer-events: none;}
+#stability-indicator{ position: fixed; bottom: 180px; left: 50%; transform: translateX(-50%); z-index: 100; background: rgba(0,0,0,0.7); backdrop-filter: blur(8px); padding: 8px 20px; border-radius: 20px; border: 1px solid var(--theme-color); font-family: monospace; font-size: 12px; color:#b0d4b0; pointer-events: none;}
 #stability-bar{ display: inline-block; width: 150px; height: 8px; background: #1a1a3a; border-radius: 4px; margin-left: 8px; vertical-align: middle; overflow: hidden;}
 #stability-fill{ height: 100%; background: linear-gradient(90deg, #00ff88, #ffd700, #ff3333); width: 100%; transition: width 0.2s; border-radius: 4px;}
 
-#wind-indicator{ position: fixed; top: 140px; right: 20px; z-index: 100; background: rgba(0,0,0,0.7); backdrop-filter: blur(8px); padding: 8px 15px; border-radius: 15px; border: 1px solid #8b5a2b; font-family: monospace; font-size: 12px; color:#b0d4b0; pointer-events: none;}
+#wind-indicator{ position: fixed; top: 140px; right: 20px; z-index: 100; background: rgba(0,0,0,0.7); backdrop-filter: blur(8px); padding: 8px 15px; border-radius: 15px; border: 1px solid var(--theme-color); font-family: monospace; font-size: 12px; color:#b0d4b0; pointer-events: none;}
 
 #collision-flash{ position: fixed; inset: 0; background: radial-gradient(circle, rgba(255,50,50,0.4), transparent 70%); pointer-events: none; opacity: 0; z-index: 110; transition: opacity 0.1s;}
 #collision-flash.active{ opacity: 1;}
 
 #controls-hint{ position: fixed; bottom: 20px; left: 20px; background: rgba(0,0,0,0.7); padding: 8px 14px; border-radius: 15px; font-size: 11px; pointer-events: none; font-family: monospace; color:#b0d4b0; z-index: 100; backdrop-filter: blur(5px); line-height: 1.6;}
 
-#target-panel{ position: fixed; top: 20px; right: 20px; background: rgba(0, 0, 0, 0.75); backdrop-filter: blur(10px); padding: 12px 20px; border-radius: 20px; text-align: center; border-right: 3px solid #ffd700; pointer-events: none; font-family: monospace; min-width: 170px; z-index: 100;}
-#target-counter{ font-size: 36px; font-weight: bold; color:#ffd700; text-shadow: 0 0 10px orange;}
+#target-panel{ position: fixed; top: 20px; right: 20px; background: rgba(0, 0, 0, 0.75); backdrop-filter: blur(10px); padding: 12px 20px; border-radius: 20px; text-align: center; border-right: 3px solid var(--theme-color); pointer-events: none; font-family: monospace; min-width: 170px; z-index: 100;}
+#target-counter{ font-size: 36px; font-weight: bold; color:var(--theme-color); text-shadow: 0 0 10px var(--theme-glow);}
 
-.lesson-badge{ position: fixed; bottom: 20px; right: 20px; background:#000000aa; padding: 5px 12px; border-radius: 20px; font-size: 11px; color:#8b5a2b; pointer-events: none; font-family: monospace; z-index: 100;}
+.lesson-badge{ position: fixed; bottom: 20px; right: 20px; background:#000000aa; padding: 5px 12px; border-radius: 20px; font-size: 11px; color:var(--theme-color); pointer-events: none; font-family: monospace; z-index: 100; border: 1px solid var(--theme-color);}
 
 #resetDroneBtn, #exitMenuBtn{ position: fixed; bottom: 130px; z-index: 9999; background: linear-gradient(145deg,#8b5a2b,#654321); border: none; padding: 10px 30px; border-radius: 40px; font-weight: bold; font-family: monospace; cursor: pointer; box-shadow: 0 4px 0 #3d2817, 0 6px 15px rgba(139, 90, 43, 0.6); transition: 0.1s; font-size: 14px; color: white;}
 #resetDroneBtn{ left: calc(50% - 160px);}
@@ -77,12 +295,13 @@ body{ overflow: hidden; font-family:'Segoe UI','Orbitron', monospace; background
 
 .victory-modal{ position: fixed; inset: 0; background: rgba(0, 0, 0, 0.9); backdrop-filter: blur(15px); z-index: 10000; display: flex; align-items: center; justify-content: center; opacity: 0; visibility: hidden; transition: all 0.5s ease;}
 .victory-modal.show{ opacity: 1; visibility: visible;}
-.victory-content{ background: linear-gradient(135deg,#2d4a2d,#1a2f1a); border-radius: 30px; padding: 50px; text-align: center; border: 2px solid #ffd700; box-shadow: 0 0 80px rgba(255, 215, 0, 0.5); animation: victoryGlow 1s ease-in-out infinite; max-width: 500px; margin: 20px;}
-@keyframes victoryGlow{ 0%, 100%{ box-shadow: 0 0 40px rgba(255, 215, 0, 0.3);} 50%{ box-shadow: 0 0 80px rgba(255, 215, 0, 0.8);}}
-.victory-content h2{ font-size: 48px; color:#ffd700; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 3px;}
+.victory-content{ background: linear-gradient(135deg,#2d4a2d,#1a2f1a); border-radius: 30px; padding: 50px; text-align: center; border: 2px solid var(--theme-color); box-shadow: 0 0 80px var(--theme-glow); animation: victoryGlow 1s ease-in-out infinite; max-width: 500px; margin: 20px;}
+@keyframes victoryGlow{ 0%, 100%{ box-shadow: 0 0 40px var(--theme-glow);} 50%{ box-shadow: 0 0 80px var(--theme-glow);}}
+.victory-content h2{ font-size: 48px; color:var(--theme-color); margin-bottom: 20px; text-transform: uppercase; letter-spacing: 3px;}
 .victory-content p{ font-size: 18px; color:#ccffcc; margin: 20px 0; line-height: 1.6;}
 .victory-stats{ background: rgba(0, 0, 0, 0.5); border-radius: 20px; padding: 20px; margin: 20px 0; font-size: 20px;}
-.victory-stats span{ color:#ffd700; font-size: 32px; font-weight: bold;}
+.victory-stats span{ color:var(--theme-color); font-size: 32px; font-weight: bold;}
+.victory-difficulty{ display: inline-block; padding: 6px 18px; border-radius: 20px; background: var(--theme-gradient); color: white; font-weight: bold; letter-spacing: 2px; margin: 10px 0; box-shadow: 0 4px 15px var(--theme-glow);}
 .restart-game-btn, .exit-game-btn{ border: none; padding: 15px 40px; border-radius: 50px; font-size: 18px; font-weight: bold; color: white; cursor: pointer; margin: 10px; transition: 0.2s;}
 .restart-game-btn{ background: linear-gradient(145deg,#8b5a2b,#654321); box-shadow: 0 5px 0 #3d2817;}
 .exit-game-btn{ background: linear-gradient(145deg,#cc3333,#882222); box-shadow: 0 5px 0 #551111;}
@@ -111,6 +330,10 @@ body{ overflow: hidden; font-family:'Segoe UI','Orbitron', monospace; background
  .logo-sub{ font-size: 9px;}
  .intro-title{ font-size: 28px;}
  .intro-subtitle{ font-size: 14px;}
+ .difficulty-grid{ grid-template-columns: 1fr; gap: 15px; max-width: 280px; margin: 0 auto;}
+ .difficulty-btn{ min-height: 160px;}
+ .difficulty-btn .icon{ font-size: 48px;}
+ .difficulty-btn .name{ font-size: 15px;}
  .start-btn{ padding: 14px 40px; font-size: 16px;}
  .victory-content{ padding: 30px;}
  .victory-content h2{ font-size: 32px;}
@@ -136,9 +359,30 @@ body{ overflow: hidden; font-family:'Segoe UI','Orbitron', monospace; background
   <div class="intro-subtitle">Qwen · БПЛА ТРЕНАЖЁР · УРОК 5</div>
   <div class="intro-desc">
     Грузовой дрон доставляет медикаменты в горные районы. Управляйте тяжёлым дроном 
-    с подвешенным грузом через ветер и турбулентность. Точно приземлитесь в 5 зонах доставки. 
-    У вас <b>4 минуты</b>!
+    с подвешенным грузом через ветер и турбулентность. Точно приземлитесь в 5 зонах доставки.
   </div>
+
+  <div class="difficulty-section">
+    <div class="difficulty-title">⚙️ ВЫБЕРИТЕ УРОВЕНЬ СЛОЖНОСТИ</div>
+    <div class="difficulty-grid">
+      <button class="difficulty-btn easy" data-difficulty="easy">
+        <span class="check-mark">✓</span>
+        <span class="icon">🟢</span>
+        <div class="name">Лёгкий</div>
+      </button>
+      <button class="difficulty-btn medium selected" data-difficulty="medium">
+        <span class="check-mark">✓</span>
+        <span class="icon">🟡</span>
+        <div class="name">Средний</div>
+      </button>
+      <button class="difficulty-btn hard" data-difficulty="hard">
+        <span class="check-mark">✓</span>
+        <span class="icon">🔴</span>
+        <div class="name">Сложный</div>
+      </button>
+    </div>
+  </div>
+
   <button class="start-btn" id="startBtn">НАЧАТЬ ДОСТАВКУ</button>
 </div>
 
@@ -153,7 +397,7 @@ body{ overflow: hidden; font-family:'Segoe UI','Orbitron', monospace; background
     <div class="stats">
       <div class="stat">📦 Доставлено: <span id="hits">0</span></div>
       <div class="stat">⏱️ Время: <span id="mission-timer">240</span>с</div>
-      <div class="stat">📡 Урок 5: Грузовая доставка</div>
+      <div class="stat" id="difficulty-stat">🎚️ Уровень: <span id="difficulty-name">Средний</span></div>
     </div>
   </div>
 
@@ -174,7 +418,7 @@ body{ overflow: hidden; font-family:'Segoe UI','Orbitron', monospace; background
 
   <div id="wind-indicator">
     💨 Ветер: <span id="wind-value">0</span> м/с<br>
-    <span style="font-size:10px; color:#8b5a2b;">Направление: <span id="wind-direction">С</span></span>
+    <span style="font-size:10px; color:var(--theme-color);">Направление: <span id="wind-direction">С</span></span>
   </div>
 
   <div id="stability-indicator">
@@ -191,7 +435,7 @@ body{ overflow: hidden; font-family:'Segoe UI','Orbitron', monospace; background
     📦 Груз качается как маятник
   </div>
 
-  <div class="lesson-badge">📡 ЗАДАНИЕ: Доставить 5 грузов за 4 минуты</div>
+  <div class="lesson-badge" id="lesson-badge">📡 ЗАДАНИЕ: Доставить 5 грузов</div>
 
   <button id="resetDroneBtn">🔄 Перезапустить</button>
   <button id="exitMenuBtn">🚪 Выйти в меню</button>
@@ -209,7 +453,7 @@ body{ overflow: hidden; font-family:'Segoe UI','Orbitron', monospace; background
       </div>
       ✅ Деньги придут мгновенно. Без комиссии. Безопасно.<br><br>
       ❤️ Спасибо за поддержку! ❤️<br><br>
-      🌟 👉 <a href="https://ancf-hue.github.io/" target="_blank">Каталог бесплатных офлайн-приложений Anti-AI Shield.</a>
+      🌟 👉 <a href="https://ancf-hue.github.io/" target="_blank" rel="noopener">Каталог бесплатных офлайн-приложений Anti-AI Shield.</a>
     </div>
   </div>
 </div>
@@ -218,6 +462,7 @@ body{ overflow: hidden; font-family:'Segoe UI','Orbitron', monospace; background
   <div class="victory-content">
     <h2>🏆 ДОСТАВКА ЗАВЕРШЕНА! 🏆</h2>
     <p>Отличная работа, оператор "МЕДВЕДЬ"!<br>Все грузы доставлены!</p>
+    <div class="victory-difficulty" id="victory-difficulty-badge">🟡 СРЕДНИЙ</div>
     <div class="victory-stats">
       Доставлено: <span id="victoryHits">5</span>/5 📦<br>
       Средняя устойчивость: <span id="victoryStability">0</span>% 📊<br>
@@ -235,24 +480,85 @@ body{ overflow: hidden; font-family:'Segoe UI','Orbitron', monospace; background
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
-window.addEventListener('keydown', function(e){
-  if(['ArrowUp','ArrowDown','ArrowLeft','ArrowRight',' ','w','W','s','S','a','A','d','D','ц','Ц','ы','Ы','ф','Ф','в','В','q','Q','e','E','t','T'].includes(e.key)){
-    e.preventDefault();
+// === ПРЕСЕТЫ УРОВНЕЙ СЛОЖНОСТИ ===
+const DIFFICULTY_PRESETS = {
+  easy: {
+    name: 'Лёгкий',
+    icon: '🟢',
+    color: '#48bb78',
+    colorRGB: '72,187,120',
+    dark: '#2f855a',
+    MISSION_TIME: 300,
+    WIND_MAX_SPEED: 3,
+    WIND_CHANGE_INTERVAL: 5000,
+    DRONE_SPEED: 0.08,
+    DRONE_DRAG: 0.94,
+    MAX_SPEED: 2.0,
+    CLIMB_SPEED: 0.25,
+    DIVE_SPEED: 0.35,
+    CAPTURE_RADIUS: 6,
+    CAPTURE_TIME: 1500,
+    CARGO_SWING_DAMPING: 0.995,
+    CARGO_SWING_FORCE: 0.3,
+    COLLISION_FORCE_THRESHOLD: 0.15,
+    CRASH_FORCE_THRESHOLD: 0.4,
+    START_ALTITUDE: 35,
+    MAX_ALTITUDE: 90,
+    MIN_ALTITUDE: 3
+  },
+  medium: {
+    name: 'Средний',
+    icon: '🟡',
+    color: '#ecc94b',
+    colorRGB: '236,201,75',
+    dark: '#d69e2e',
+    MISSION_TIME: 240,
+    WIND_MAX_SPEED: 6,
+    WIND_CHANGE_INTERVAL: 3000,
+    DRONE_SPEED: 0.06,
+    DRONE_DRAG: 0.92,
+    MAX_SPEED: 2.5,
+    CLIMB_SPEED: 0.2,
+    DIVE_SPEED: 0.3,
+    CAPTURE_RADIUS: 4,
+    CAPTURE_TIME: 2000,
+    CARGO_SWING_DAMPING: 0.98,
+    CARGO_SWING_FORCE: 0.5,
+    COLLISION_FORCE_THRESHOLD: 0.05,
+    CRASH_FORCE_THRESHOLD: 0.15,
+    START_ALTITUDE: 30,
+    MAX_ALTITUDE: 80,
+    MIN_ALTITUDE: 5
+  },
+  hard: {
+    name: 'Сложный',
+    icon: '🔴',
+    color: '#e53e3e',
+    colorRGB: '229,62,62',
+    dark: '#c53030',
+    MISSION_TIME: 180,
+    WIND_MAX_SPEED: 10,
+    WIND_CHANGE_INTERVAL: 1800,
+    DRONE_SPEED: 0.05,
+    DRONE_DRAG: 0.88,
+    MAX_SPEED: 3.0,
+    CLIMB_SPEED: 0.15,
+    DIVE_SPEED: 0.25,
+    CAPTURE_RADIUS: 2.5,
+    CAPTURE_TIME: 2500,
+    CARGO_SWING_DAMPING: 0.96,
+    CARGO_SWING_FORCE: 0.8,
+    COLLISION_FORCE_THRESHOLD: 0.03,
+    CRASH_FORCE_THRESHOLD: 0.1,
+    START_ALTITUDE: 25,
+    MAX_ALTITUDE: 70,
+    MIN_ALTITUDE: 6
   }
-});
+};
 
-const CONFIG = {
-  DRONE_SPEED: 0.06,
-  DRONE_DRAG: 0.92,
+const BASE_CONFIG = {
   MAX_TILT: 0.25,
-  MAX_ALTITUDE: 80,
-  MIN_ALTITUDE: 5,
-  START_ALTITUDE: 30,
-  CLIMB_SPEED: 0.2,
-  DIVE_SPEED: 0.3,
   HOVER_FREQ: 0.001,
-  COLLISION_FORCE_THRESHOLD: 0.05,
-  CRASH_FORCE_THRESHOLD: 0.15,
   LIMIT_X: 20,
   LIMIT_Z: 20,
   MIN_X: -20,
@@ -263,23 +569,18 @@ const CONFIG = {
   CAMERA_LERP: 0.09,
   LOW_END_CORES: 4,
   MAX_PIXEL_RATIO: 2,
-  CAPTURE_TIME: 2000,
-  CAPTURE_RADIUS: 4,
   TRAIL_LENGTH: 20,
-  MISSION_TIME: 240,
-  WIND_MAX_SPEED: 8,
-  WIND_CHANGE_INTERVAL: 3000,
-  CARGO_LENGTH: 3,
-  CARGO_SWING_DAMPING: 0.98,
-  MAX_SPEED: 2.5
+  CARGO_LENGTH: 3
 };
+
+let CONFIG = { ...BASE_CONFIG, ...DIFFICULTY_PRESETS.medium };
 
 const state = {
   keys: {},
   mouseDown: false,
   pitch: 0,
   roll: 0,
-  velocity: { x: 0, z: 0 },
+  velocity: { x: 0, y: 0, z: 0 }, // ИСПРАВЛЕНО: добавлено y
   altitude: CONFIG.START_ALTITUDE,
   targetAltitude: CONFIG.START_ALTITUDE,
   isCrashed: false,
@@ -301,7 +602,8 @@ const state = {
   cargoSwing: { x: 0, z: 0, velocityX: 0, velocityZ: 0 },
   cargoStability: 100,
   stabilitySamples: 0,
-  avgStability: 100
+  avgStability: 100,
+  difficulty: 'medium'
 };
 
 let scene, camera, renderer, droneGroup, cargoGroup, cargoRope;
@@ -340,6 +642,42 @@ function checkWebGL(){
     else { img.onerror = null; }
   };
 })();
+
+function applyTheme(difficulty){
+  const preset = DIFFICULTY_PRESETS[difficulty];
+  if(!preset) return;
+  document.documentElement.style.setProperty('--theme-color', preset.color);
+  document.documentElement.style.setProperty('--theme-color-rgb', preset.colorRGB);
+  document.documentElement.style.setProperty('--theme-glow', `rgba(${preset.colorRGB},0.6)`);
+  document.documentElement.style.setProperty('--theme-dark', preset.dark);
+  document.documentElement.style.setProperty('--theme-gradient', `linear-gradient(135deg,${preset.color},${preset.dark})`);
+}
+
+function applyDifficulty(difficulty){
+  const preset = DIFFICULTY_PRESETS[difficulty];
+  if(!preset) return;
+  state.difficulty = difficulty;
+  CONFIG = { ...BASE_CONFIG, ...preset };
+  applyTheme(difficulty);
+  
+  const diffName = document.getElementById('difficulty-name');
+  if(diffName) diffName.innerText = `${preset.icon} ${preset.name}`;
+  
+  const badge = document.getElementById('lesson-badge');
+  if(badge) badge.innerText = `📡 ${preset.icon} ${preset.name.toUpperCase()}: 5 грузов за ${Math.floor(preset.MISSION_TIME/60)} мин`;
+}
+
+document.querySelectorAll('.difficulty-btn').forEach(btn => {
+  btn.addEventListener('click', function(){
+    document.querySelectorAll('.difficulty-btn').forEach(b => b.classList.remove('selected'));
+    this.classList.add('selected');
+    const diff = this.dataset.difficulty;
+    applyDifficulty(diff);
+    SFX.beep();
+  });
+});
+
+applyDifficulty('medium');
 
 function copyPhone(){
   const phone = document.getElementById('phoneNumber').innerText;
@@ -400,7 +738,7 @@ function exitToMenu(){
   state.isCrashed = false;
   state.gameCompleted = false;
   state.deliveredCount = 0;
-  state.velocity = { x: 0, z: 0 };
+  state.velocity = { x: 0, y: 0, z: 0 };
   state.keys = {};
   state.mouseDown = false;
   
@@ -500,15 +838,24 @@ function showVictoryModal(){
     clearInterval(state.timerInterval);
     state.timerInterval = null;
   }
-  state.velocity = { x: 0, z: 0 };
+  state.velocity = { x: 0, y: 0, z: 0 };
   
   const timeUsed = CONFIG.MISSION_TIME - state.timeLeft;
   document.getElementById('victoryHits').innerText = state.deliveredCount;
   document.getElementById('victoryStability').innerText = Math.round(state.avgStability);
   document.getElementById('victoryTime').innerText = timeUsed;
+  
+  const preset = DIFFICULTY_PRESETS[state.difficulty];
+  const badge = document.getElementById('victory-difficulty-badge');
+  if(badge){
+    badge.innerText = `${preset.icon} ${preset.name.toUpperCase()}`;
+    badge.style.background = `linear-gradient(135deg,${preset.color},${preset.dark})`;
+    badge.style.boxShadow = `0 4px 20px rgba(${preset.colorRGB},0.6)`;
+  }
+  
   document.getElementById('victoryModal').classList.add('show');
   SFX.victory();
-  showNotification("✅ УРОК 5 ПРОЙДЕН! Мастер грузовой доставки!", 'success');
+  showNotification(`✅ УРОК 5 ПРОЙДЕН! Уровень: ${preset.name}`, 'success');
 }
 
 function clearActiveAnimations(){
@@ -524,7 +871,9 @@ function fullGameRestart(){
   state.gameCompleted = false;
   state.isCrashed = false;
   
-  state.velocity = { x: 0, z: 0 };
+  applyDifficulty(state.difficulty);
+  
+  state.velocity = { x: 0, y: 0, z: 0 };
   state.altitude = CONFIG.START_ALTITUDE;
   state.targetAltitude = CONFIG.START_ALTITUDE;
   state.pitch = 0;
@@ -551,6 +900,7 @@ function fullGameRestart(){
   document.getElementById('crosshair').classList.remove('locked');
   document.getElementById('wind-value').innerText = '0';
   document.getElementById('wind-direction').innerText = 'С';
+  document.getElementById('mission-timer').innerText = CONFIG.MISSION_TIME;
   
   if(droneGroup){
     droneGroup.position.set(0, state.altitude, 0);
@@ -591,7 +941,8 @@ function fullGameRestart(){
   startMissionTimer();
   
   clearActiveAnimations();
-  showNotification("🔄 Доставка перезапущена! Вперёд, МЕДВЕДЬ! 🐻", 'success');
+  const preset = DIFFICULTY_PRESETS[state.difficulty];
+  showNotification(`🔄 ${preset.icon} ${preset.name.toUpperCase()} — Доставка перезапущена!`, 'success');
   
   setTimeout(() => { state.isRestarting = false; }, 500);
 }
@@ -648,6 +999,8 @@ function initSimulator(){
     return;
   }
 
+  applyDifficulty(state.difficulty);
+
   setupScene();
   setupLights();
   setupFloor();
@@ -669,7 +1022,8 @@ function initSimulator(){
   }, 1500);
 
   animate(performance.now());
-  console.log('✅ Урок 5 запущен. Оператор МЕДВЕДЬ — к доставке!');
+  const preset = DIFFICULTY_PRESETS[state.difficulty];
+  console.log(`✅ Урок 5 запущен. Уровень: ${preset.name}. Оператор МЕДВЕДЬ — к доставке!`);
 }
 
 function setupScene(){
@@ -985,7 +1339,7 @@ function setupTargets(){
       const dx = dronePos.x - this.group.position.x;
       const dz = dronePos.z - this.group.position.z;
       const horizontalDist = Math.sqrt(dx * dx + dz * dz);
-      return horizontalDist < CONFIG.CAPTURE_RADIUS && droneAltitude < 8;
+      return horizontalDist < CONFIG.CAPTURE_RADIUS && droneAltitude < 10;
     }
   }
 
@@ -1017,7 +1371,7 @@ function updateWind(){
     const dirIndex = Math.round(newDirection / (Math.PI / 4)) % 8;
     document.getElementById('wind-direction').innerText = directions[dirIndex];
     
-    if(newSpeed > 6){
+    if(newSpeed > CONFIG.WIND_MAX_SPEED * 0.7){
       SFX.wind();
     }
   }
@@ -1026,9 +1380,10 @@ function updateWind(){
 function updateCargoPhysics(){
   const gravity = 0.01;
   const damping = CONFIG.CARGO_SWING_DAMPING;
+  const swingForce = CONFIG.CARGO_SWING_FORCE;
   
-  state.cargoSwing.velocityX += state.wind.x * 0.5;
-  state.cargoSwing.velocityZ += state.wind.z * 0.5;
+  state.cargoSwing.velocityX += state.wind.x * swingForce;
+  state.cargoSwing.velocityZ += state.wind.z * swingForce;
   
   state.cargoSwing.velocityX -= state.cargoSwing.x * gravity;
   state.cargoSwing.velocityZ -= state.cargoSwing.z * gravity;
@@ -1104,8 +1459,9 @@ function applyCollision(){
     state.velocity.z = Math.sign(state.velocity.z) * CONFIG.MAX_SPEED;
   }
 
-  if(state.altitude <= 1){
-    state.altitude = 1;
+  // ИСПРАВЛЕНО: используем CONFIG.MIN_ALTITUDE вместо магического числа 1
+  if(state.altitude <= CONFIG.MIN_ALTITUDE){
+    state.altitude = CONFIG.MIN_ALTITUDE;
     if(state.velocity.y < -0.1){
       impactForce = Math.abs(state.velocity.y) * 10;
       state.velocity.y = 0;
